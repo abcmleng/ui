@@ -44,9 +44,9 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
   };
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-emerald-50 to-cyan-100 overflow-hidden">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-emerald-50 to-cyan-100">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
         <div className="flex justify-center">
           <img
             className="h-8"
@@ -57,7 +57,7 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-6 overflow-hidden">
+      <div className="flex-1 flex items-center justify-center p-4 min-h-0">
         <div className="w-full max-w-md">
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
             {isProcessing ? (
@@ -76,9 +76,9 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
             ) : (
               <>
                 {/* Success Section */}
-                <div className="bg-gradient-to-r from-emerald-600 to-cyan-600 px-6 py-8 text-center">
-                  <CheckCircle className="w-16 h-16 mx-auto mb-4 text-white" />
-                  <h1 className="text-2xl font-bold text-white mb-2">Verification Complete!</h1>
+                <div className="bg-gradient-to-r from-emerald-600 to-cyan-600 px-6 py-6 text-center">
+                  <CheckCircle className="w-12 h-12 mx-auto mb-3 text-white" />
+                  <h1 className="text-xl font-bold text-white mb-2">Verification Complete!</h1>
                   <p className="text-emerald-100 text-sm">
                     Your KYC verification has been successfully processed
                   </p>
@@ -122,7 +122,7 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
                   <div className="space-y-3">
                     <button
                       onClick={handleDownloadReport}
-                      className="w-full bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                      className="w-full bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
                     >
                       <Download className="w-5 h-5" />
                       Download Report
@@ -130,7 +130,7 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
                     
                     <button
                       onClick={onRestart}
-                      className="w-full bg-white hover:bg-gray-50 text-gray-700 font-semibold py-4 px-6 rounded-xl border-2 border-gray-200 transition-all duration-200 flex items-center justify-center gap-2"
+                      className="w-full bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-xl border-2 border-gray-200 transition-all duration-200 flex items-center justify-center gap-2"
                     >
                       <RefreshCw className="w-5 h-5" />
                       Start New Verification
@@ -148,7 +148,7 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
       </div>
 
       {/* Footer */}
-      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-6 py-3">
+      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
         <div className="flex justify-center items-center gap-2">
           <span className="text-sm text-gray-500">Powered by</span>
           <img

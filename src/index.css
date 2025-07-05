@@ -38,3 +38,20 @@ html, body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+
+/* Ensure proper viewport height handling */
+.h-screen {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
+}
+
+/* Prevent content overflow */
+.min-h-0 {
+  min-height: 0;
+}
+
+/* Ensure flex containers don't overflow */
+.flex-1 {
+  flex: 1 1 0%;
+  min-height: 0;
+}

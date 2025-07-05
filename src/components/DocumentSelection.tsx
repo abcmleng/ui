@@ -49,9 +49,9 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-indigo-50 to-purple-100 overflow-hidden">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-indigo-50 to-purple-100">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
         <div className="flex justify-center">
           <img
             className="h-8"
@@ -62,13 +62,13 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-6 overflow-hidden">
+      <div className="flex-1 flex items-center justify-center p-4 min-h-0">
         <div className="w-full max-w-md">
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
             {/* Title Section */}
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-8 text-center">
-              <FileText className="w-12 h-12 mx-auto mb-4 text-white" />
-              <h1 className="text-2xl font-bold text-white mb-2">Select Document Type</h1>
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-6 text-center">
+              <FileText className="w-10 h-10 mx-auto mb-3 text-white" />
+              <h1 className="text-xl font-bold text-white mb-2">Select Document Type</h1>
               <p className="text-indigo-100 text-sm">Choose the type of document you want to verify</p>
             </div>
 
@@ -107,7 +107,7 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-6 py-3">
+      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
         <div className="flex justify-center items-center gap-2">
           <span className="text-sm text-gray-500">Powered by</span>
           <img

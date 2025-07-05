@@ -133,8 +133,20 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
 
   if (captureError) {
     return (
-      <div className="fixed inset-0 flex flex-col bg-slate-50 overflow-hidden">
-        <div className="flex-1 flex items-center justify-center p-6">
+      <div className="h-screen flex flex-col bg-slate-50">
+        {/* Header */}
+        <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+          <div className="flex justify-center">
+            <img
+              className="h-8"
+              src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
+              alt="IDMerit Logo"
+            />
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 flex items-center justify-center p-4">
           <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
             <ErrorPage
               error={captureError}
@@ -143,14 +155,26 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
             />
           </div>
         </div>
+
+        {/* Footer */}
+        <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
+          <div className="flex justify-center items-center gap-2">
+            <span className="text-sm text-gray-500">Powered by</span>
+            <img
+              className="h-5"
+              src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
+              alt="IDMerit Logo"
+            />
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-green-50 to-teal-100 overflow-hidden">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-green-50 to-teal-100">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
         <div className="flex justify-center">
           <img
             className="h-8"
@@ -161,24 +185,24 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-6 overflow-hidden">
+      <div className="flex-1 flex items-center justify-center p-4 min-h-0">
         <div className="w-full max-w-md">
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
             {/* Title Section */}
-            <div className="bg-gradient-to-r from-green-600 to-teal-600 px-6 py-8 text-center">
-              <Scan className="w-12 h-12 mx-auto mb-4 text-white" />
-              <h1 className="text-2xl font-bold text-white mb-2">Scan MRZ Code</h1>
+            <div className="bg-gradient-to-r from-green-600 to-teal-600 px-6 py-6 text-center">
+              <Scan className="w-10 h-10 mx-auto mb-3 text-white" />
+              <h1 className="text-xl font-bold text-white mb-2">Scan MRZ Code</h1>
               <p className="text-green-100 text-sm">Position the MRZ area at the bottom of your ID</p>
             </div>
 
             {/* Camera Section */}
-            <div className="p-6">
-              <div className="relative bg-gray-900 rounded-2xl overflow-hidden aspect-[4/3] mb-6">
+            <div className="p-4">
+              <div className="relative bg-gray-900 rounded-2xl overflow-hidden aspect-[4/3] mb-4">
                 <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-80 h-20 border-4 border-white/60 rounded-lg flex items-center justify-center shadow-lg">
+                  <div className="w-72 h-16 border-4 border-white/60 rounded-lg flex items-center justify-center shadow-lg">
                     <div className="text-white/80 text-center">
-                      <Scan className="w-8 h-8 mx-auto mb-1" />
+                      <Scan className="w-6 h-6 mx-auto mb-1" />
                       <p className="text-xs font-medium">MRZ Scan Area</p>
                     </div>
                   </div>
@@ -195,19 +219,19 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
               </div>
 
               {ocrStatus === 'SUCCESSFUL' && (
-                <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg mb-4 text-sm text-center font-semibold">
+                <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 rounded-lg mb-4 text-sm text-center font-semibold">
                   MRZ Status: SUCCESSFUL
                 </div>
               )}
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-4 text-sm">
+                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-4 text-sm">
                   {error}
                 </div>
               )}
 
               {uploadError && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-4 text-sm">
+                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-4 text-sm">
                   {uploadError}
                 </div>
               )}
@@ -218,7 +242,7 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
                   <button
                     onClick={handleScan}
                     disabled={!isStreaming || isScanning}
-                    className="w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                    className="w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
                   >
                     {isScanning ? (
                       <>
@@ -235,7 +259,7 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
                 ) : (
                   <button
                     onClick={handleRetry}
-                    className="w-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                    className="w-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
                   >
                     Retry
                   </button>
@@ -247,7 +271,7 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
       </div>
 
       {/* Footer */}
-      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-6 py-3">
+      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
         <div className="flex justify-center items-center gap-2">
           <span className="text-sm text-gray-500">Powered by</span>
           <img
