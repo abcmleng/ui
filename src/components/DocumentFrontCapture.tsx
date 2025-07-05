@@ -129,10 +129,10 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
     return (
       <div className="h-screen flex flex-col bg-slate-50">
         {/* Header */}
-        <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+        <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
           <div className="flex justify-center">
             <img
-              className="h-8"
+              className="h-6"
               src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
               alt="IDMerit Logo"
             />
@@ -140,8 +140,8 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
         </div>
 
         {/* Content */}
-        <div className="flex-1 flex items-center justify-center p-4">
-          <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
+        <div className="flex-1 flex items-center justify-center p-3 min-h-0">
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-4">
             <ErrorPage
               error={captureError}
               onRetry={() => {
@@ -159,9 +159,9 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
         {/* Footer */}
         <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
           <div className="flex justify-center items-center gap-2">
-            <span className="text-sm text-gray-500">Powered by</span>
+            <span className="text-xs text-gray-500">Powered by</span>
             <img
-              className="h-5"
+              className="h-4"
               src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
               alt="IDMerit Logo"
             />
@@ -174,10 +174,10 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-purple-50 to-pink-100">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
         <div className="flex justify-center">
           <img
-            className="h-8"
+            className="h-6"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />
@@ -185,19 +185,19 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-4 min-h-0">
-        <div className="w-full max-w-md">
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+      <div className="flex-1 flex flex-col justify-center p-3 min-h-0 overflow-hidden">
+        <div className="w-full max-w-md mx-auto">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* Title Section */}
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-6 text-center">
-              <CreditCard className="w-10 h-10 mx-auto mb-3 text-white" />
-              <h1 className="text-xl font-bold text-white mb-2">Document Front</h1>
-              <p className="text-purple-100 text-sm">Align your ID front within the frame</p>
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-4 text-center">
+              <CreditCard className="w-8 h-8 mx-auto mb-2 text-white" />
+              <h1 className="text-lg font-bold text-white mb-1">Document Front</h1>
+              <p className="text-purple-100 text-xs">Align your ID front within the frame</p>
             </div>
 
             {/* Camera Section */}
-            <div className="p-4">
-              <div className="relative bg-gray-900 rounded-2xl overflow-hidden aspect-[4/3] mb-4">
+            <div className="p-3">
+              <div className="relative bg-gray-900 rounded-xl overflow-hidden aspect-[4/3] mb-3">
                 {!capturedImage ? (
                   <>
                     <video
@@ -208,16 +208,16 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-72 h-44 border-4 border-white/60 rounded-2xl flex items-center justify-center shadow-lg">
+                      <div className="w-60 h-36 border-3 border-white/60 rounded-xl flex items-center justify-center shadow-lg">
                         <div className="text-white/80 text-center">
-                          <CreditCard className="w-12 h-12 mx-auto mb-2" />
-                          <p className="text-sm font-medium">Align ID Front</p>
+                          <CreditCard className="w-8 h-8 mx-auto mb-1" />
+                          <p className="text-xs font-medium">Align ID Front</p>
                         </div>
                       </div>
                     </div>
                     {isLoading && (
                       <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-4 border-white border-t-transparent"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-3 border-white border-t-transparent"></div>
                       </div>
                     )}
                   </>
@@ -231,36 +231,36 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
               </div>
 
               {uploadError && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-4 text-sm">
+                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-3 text-xs">
                   {uploadError}
                 </div>
               )}
 
               {isUploading && (
-                <div className="bg-blue-50 border border-blue-200 text-blue-600 px-3 py-2 rounded-lg mb-4 text-sm text-center">
+                <div className="bg-blue-50 border border-blue-200 text-blue-600 px-3 py-2 rounded-lg mb-3 text-xs text-center">
                   <div className="flex items-center justify-center gap-2">
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-blue-600 border-t-transparent"></div>
+                    <div className="animate-spin rounded-full h-3 w-3 border-2 border-blue-600 border-t-transparent"></div>
                     Processing document...
                   </div>
                 </div>
               )}
 
               {/* Action Buttons */}
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {!capturedImage && (
                   <button
                     onClick={handleCapture}
                     disabled={!isStreaming || isCapturing || isUploading}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-lg text-sm"
                   >
                     {isCapturing ? (
                       <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
                         Capturing...
                       </>
                     ) : (
                       <>
-                        <CreditCard className="w-5 h-5" />
+                        <CreditCard className="w-4 h-4" />
                         Capture Document
                       </>
                     )}
@@ -275,9 +275,9 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
       {/* Footer */}
       <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
         <div className="flex justify-center items-center gap-2">
-          <span className="text-sm text-gray-500">Powered by</span>
+          <span className="text-xs text-gray-500">Powered by</span>
           <img
-            className="h-5"
+            className="h-4"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />

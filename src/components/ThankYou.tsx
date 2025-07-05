@@ -46,10 +46,10 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-emerald-50 to-cyan-100">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
         <div className="flex justify-center">
           <img
-            className="h-8"
+            className="h-6"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />
@@ -57,16 +57,16 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-4 min-h-0">
-        <div className="w-full max-w-md">
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+      <div className="flex-1 flex flex-col justify-center p-3 min-h-0 overflow-hidden">
+        <div className="w-full max-w-md mx-auto">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {isProcessing ? (
-              <div className="p-8 text-center">
-                <div className="mb-6">
-                  <div className="animate-spin rounded-full h-16 w-16 border-4 border-emerald-500 border-t-transparent mx-auto"></div>
+              <div className="p-6 text-center">
+                <div className="mb-4">
+                  <div className="animate-spin rounded-full h-12 w-12 border-3 border-emerald-500 border-t-transparent mx-auto"></div>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Processing Verification</h2>
-                <p className="text-gray-600 mb-6">
+                <h2 className="text-lg font-bold text-gray-800 mb-3">Processing Verification</h2>
+                <p className="text-gray-600 mb-4 text-sm">
                   Please wait while we verify your documents...
                 </p>
                 <div className="bg-gray-100 rounded-full h-2">
@@ -76,25 +76,25 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
             ) : (
               <>
                 {/* Success Section */}
-                <div className="bg-gradient-to-r from-emerald-600 to-cyan-600 px-6 py-6 text-center">
-                  <CheckCircle className="w-12 h-12 mx-auto mb-3 text-white" />
-                  <h1 className="text-xl font-bold text-white mb-2">Verification Complete!</h1>
-                  <p className="text-emerald-100 text-sm">
+                <div className="bg-gradient-to-r from-emerald-600 to-cyan-600 px-4 py-4 text-center">
+                  <CheckCircle className="w-10 h-10 mx-auto mb-2 text-white" />
+                  <h1 className="text-lg font-bold text-white mb-1">Verification Complete!</h1>
+                  <p className="text-emerald-100 text-xs">
                     Your KYC verification has been successfully processed
                   </p>
                   {scannerType === 'mrz' && (
-                    <p className="text-emerald-100 font-semibold mt-2">MRZ Scan Completed</p>
+                    <p className="text-emerald-100 font-semibold mt-1 text-xs">MRZ Scan Completed</p>
                   )}
                   {scannerType === 'barcode' && (
-                    <p className="text-emerald-100 font-semibold mt-2">Barcode Scan Completed</p>
+                    <p className="text-emerald-100 font-semibold mt-1 text-xs">Barcode Scan Completed</p>
                   )}
                 </div>
 
                 {/* Summary Section */}
-                <div className="p-6">
-                  <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
-                    <h3 className="font-semibold text-emerald-800 mb-3">Verification Summary</h3>
-                    <div className="space-y-2 text-sm">
+                <div className="p-4">
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mb-4">
+                    <h3 className="font-semibold text-emerald-800 mb-2 text-sm">Verification Summary</h3>
+                    <div className="space-y-1 text-xs">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Verification ID:</span>
                         <span className="font-mono text-emerald-700 text-xs">{kycData.verificationId}</span>
@@ -119,25 +119,25 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <button
                       onClick={handleDownloadReport}
-                      className="w-full bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                      className="w-full bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-lg text-sm"
                     >
-                      <Download className="w-5 h-5" />
+                      <Download className="w-4 h-4" />
                       Download Report
                     </button>
                     
                     <button
                       onClick={onRestart}
-                      className="w-full bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-xl border-2 border-gray-200 transition-all duration-200 flex items-center justify-center gap-2"
+                      className="w-full bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-4 rounded-lg border-2 border-gray-200 transition-all duration-200 flex items-center justify-center gap-2 text-sm"
                     >
-                      <RefreshCw className="w-5 h-5" />
+                      <RefreshCw className="w-4 h-4" />
                       Start New Verification
                     </button>
                   </div>
 
-                  <div className="mt-6 text-center text-xs text-gray-500">
+                  <div className="mt-4 text-center text-xs text-gray-500">
                     <p>Verification completed successfully</p>
                   </div>
                 </div>
@@ -150,9 +150,9 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
       {/* Footer */}
       <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
         <div className="flex justify-center items-center gap-2">
-          <span className="text-sm text-gray-500">Powered by</span>
+          <span className="text-xs text-gray-500">Powered by</span>
           <img
-            className="h-5"
+            className="h-4"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />

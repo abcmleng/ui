@@ -131,10 +131,10 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan, onNext, 
     return (
       <div className="h-screen flex flex-col bg-slate-50">
         {/* Header */}
-        <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+        <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
           <div className="flex justify-center">
             <img
-              className="h-8"
+              className="h-6"
               src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
               alt="IDMerit Logo"
             />
@@ -142,8 +142,8 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan, onNext, 
         </div>
 
         {/* Content */}
-        <div className="flex-1 flex items-center justify-center p-4">
-          <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
+        <div className="flex-1 flex items-center justify-center p-3 min-h-0">
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-4">
             <ErrorPage
               error={captureError}
               onRetry={handleRetry}
@@ -155,9 +155,9 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan, onNext, 
         {/* Footer */}
         <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
           <div className="flex justify-center items-center gap-2">
-            <span className="text-sm text-gray-500">Powered by</span>
+            <span className="text-xs text-gray-500">Powered by</span>
             <img
-              className="h-5"
+              className="h-4"
               src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
               alt="IDMerit Logo"
             />
@@ -170,10 +170,10 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan, onNext, 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-yellow-50 to-amber-100">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
         <div className="flex justify-center">
           <img
-            className="h-8"
+            className="h-6"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />
@@ -181,24 +181,24 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan, onNext, 
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-4 min-h-0">
-        <div className="w-full max-w-md">
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+      <div className="flex-1 flex flex-col justify-center p-3 min-h-0 overflow-hidden">
+        <div className="w-full max-w-md mx-auto">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* Title Section */}
-            <div className="bg-gradient-to-r from-yellow-600 to-amber-600 px-6 py-6 text-center">
-              <Scan className="w-10 h-10 mx-auto mb-3 text-white" />
-              <h1 className="text-xl font-bold text-white mb-2">Scan Barcode</h1>
-              <p className="text-yellow-100 text-sm">Align the barcode within the frame</p>
+            <div className="bg-gradient-to-r from-yellow-600 to-amber-600 px-4 py-4 text-center">
+              <Scan className="w-8 h-8 mx-auto mb-2 text-white" />
+              <h1 className="text-lg font-bold text-white mb-1">Scan Barcode</h1>
+              <p className="text-yellow-100 text-xs">Align the barcode within the frame</p>
             </div>
 
             {/* Camera Section */}
-            <div className="p-4">
-              <div className="relative bg-gray-900 rounded-2xl overflow-hidden aspect-[4/3] mb-4">
+            <div className="p-3">
+              <div className="relative bg-gray-900 rounded-xl overflow-hidden aspect-[4/3] mb-3">
                 <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-72 h-20 border-4 border-white/60 rounded-lg flex items-center justify-center shadow-lg">
+                  <div className="w-60 h-16 border-3 border-white/60 rounded-lg flex items-center justify-center shadow-lg">
                     <div className="text-white/80 text-center">
-                      <Scan className="w-6 h-6 mx-auto mb-1" />
+                      <Scan className="w-5 h-5 mx-auto mb-1" />
                       <p className="text-xs font-medium">Barcode Scan Area</p>
                     </div>
                   </div>
@@ -207,47 +207,47 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan, onNext, 
                 {(isLoading || isScanning) && (
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                     <div className="text-center text-white">
-                      <div className="animate-spin rounded-full h-12 w-12 border-4 border-white border-t-transparent mx-auto mb-2"></div>
-                      <p className="text-sm">{isScanning ? 'Scanning...' : 'Loading camera...'}</p>
+                      <div className="animate-spin rounded-full h-8 w-8 border-3 border-white border-t-transparent mx-auto mb-2"></div>
+                      <p className="text-xs">{isScanning ? 'Scanning...' : 'Loading camera...'}</p>
                     </div>
                   </div>
                 )}
               </div>
 
               {ocrStatus === 'SUCCESSFUL' && (
-                <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 rounded-lg mb-4 text-sm text-center font-semibold">
+                <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 rounded-lg mb-3 text-xs text-center font-semibold">
                   Barcode Status: SUCCESSFUL
                 </div>
               )}
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-4 text-sm">
+                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-3 text-xs">
                   {error}
                 </div>
               )}
 
               {uploadError && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-4 text-sm">
+                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-3 text-xs">
                   {uploadError}
                 </div>
               )}
 
               {/* Action Buttons */}
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {ocrStatus !== 'SUCCESSFUL' ? (
                   <button
                     onClick={handleScan}
                     disabled={!isStreaming || isScanning}
-                    className="w-full bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-700 hover:to-amber-700 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                    className="w-full bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-700 hover:to-amber-700 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-lg text-sm"
                   >
                     {isScanning ? (
                       <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
                         Scanning...
                       </>
                     ) : (
                       <>
-                        <Scan className="w-5 h-5" />
+                        <Scan className="w-4 h-4" />
                         Scan Barcode
                       </>
                     )}
@@ -255,7 +255,7 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan, onNext, 
                 ) : (
                   <button
                     onClick={handleRetry}
-                    className="w-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                    className="w-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-lg text-sm"
                   >
                     Retry
                   </button>
@@ -269,9 +269,9 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan, onNext, 
       {/* Footer */}
       <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
         <div className="flex justify-center items-center gap-2">
-          <span className="text-sm text-gray-500">Powered by</span>
+          <span className="text-xs text-gray-500">Powered by</span>
           <img
-            className="h-5"
+            className="h-4"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />

@@ -51,10 +51,10 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-indigo-50 to-purple-100">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
         <div className="flex justify-center">
           <img
-            className="h-8"
+            className="h-6"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />
@@ -62,40 +62,40 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-4 min-h-0">
-        <div className="w-full max-w-md">
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+      <div className="flex-1 flex flex-col justify-center p-3 min-h-0 overflow-hidden">
+        <div className="w-full max-w-md mx-auto">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* Title Section */}
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-6 text-center">
-              <FileText className="w-10 h-10 mx-auto mb-3 text-white" />
-              <h1 className="text-xl font-bold text-white mb-2">Select Document Type</h1>
-              <p className="text-indigo-100 text-sm">Choose the type of document you want to verify</p>
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-4 text-center">
+              <FileText className="w-8 h-8 mx-auto mb-2 text-white" />
+              <h1 className="text-lg font-bold text-white mb-1">Select Document Type</h1>
+              <p className="text-indigo-100 text-xs">Choose the type of document you want to verify</p>
             </div>
 
             {/* Document Options */}
-            <div className="p-6">
+            <div className="p-4">
               {documentTypes.length === 0 ? (
-                <div className="text-center py-8">
-                  <p className="text-gray-500">No document types available for the selected country.</p>
+                <div className="text-center py-6">
+                  <p className="text-gray-500 text-sm">No document types available for the selected country.</p>
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {documentTypes.map((docType) => (
                     <button
                       key={docType.value}
-                      className="w-full p-4 border-2 border-gray-200 rounded-xl text-left hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-200 group focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                      className="w-full p-3 border-2 border-gray-200 rounded-lg text-left hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-200 group focus:outline-none focus:ring-3 focus:ring-indigo-200"
                       onClick={() => handleDocumentSelect(docType.value)}
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="font-semibold text-gray-900 group-hover:text-indigo-700">
+                          <h3 className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">
                             {docType.label}
                           </h3>
-                          <p className="text-sm text-gray-500 mt-1">
+                          <p className="text-xs text-gray-500 mt-1">
                             Verify your {docType.label.toLowerCase()}
                           </p>
                         </div>
-                        <div className="w-6 h-6 border-2 border-gray-300 rounded-full group-hover:border-indigo-500 transition-colors duration-200"></div>
+                        <div className="w-5 h-5 border-2 border-gray-300 rounded-full group-hover:border-indigo-500 transition-colors duration-200"></div>
                       </div>
                     </button>
                   ))}
@@ -109,9 +109,9 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
       {/* Footer */}
       <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
         <div className="flex justify-center items-center gap-2">
-          <span className="text-sm text-gray-500">Powered by</span>
+          <span className="text-xs text-gray-500">Powered by</span>
           <img
-            className="h-5"
+            className="h-4"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />

@@ -34,10 +34,10 @@ export const CountrySelection: React.FC<CountrySelectionProps> = ({
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-emerald-50 to-teal-100">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
         <div className="flex justify-center">
           <img
-            className="h-8"
+            className="h-6"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />
@@ -45,24 +45,24 @@ export const CountrySelection: React.FC<CountrySelectionProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-4 min-h-0">
-        <div className="w-full max-w-md">
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+      <div className="flex-1 flex flex-col justify-center p-3 min-h-0 overflow-hidden">
+        <div className="w-full max-w-md mx-auto">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* Title Section */}
-            <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-6 text-center">
-              <Globe className="w-10 h-10 mx-auto mb-3 text-white" />
-              <h1 className="text-xl font-bold text-white mb-2">Select Your Country</h1>
-              <p className="text-emerald-100 text-sm">Choose your country to continue verification</p>
+            <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-4 text-center">
+              <Globe className="w-8 h-8 mx-auto mb-2 text-white" />
+              <h1 className="text-lg font-bold text-white mb-1">Select Your Country</h1>
+              <p className="text-emerald-100 text-xs">Choose your country to continue verification</p>
             </div>
 
             {/* Selection Section */}
-            <div className="p-6">
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="p-4">
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Country of Document
                 </label>
                 <select
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 font-medium focus:outline-none focus:ring-4 focus:ring-emerald-200 focus:border-emerald-500 transition-all duration-200 bg-white shadow-sm"
+                  className="w-full px-3 py-3 border-2 border-gray-200 rounded-lg text-gray-900 font-medium focus:outline-none focus:ring-3 focus:ring-emerald-200 focus:border-emerald-500 transition-all duration-200 bg-white shadow-sm text-sm"
                   value={selectedCountryCode || ''}
                   onChange={handleChange}
                 >
@@ -78,10 +78,10 @@ export const CountrySelection: React.FC<CountrySelectionProps> = ({
               </div>
 
               {selectedCountryCode && (
-                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
-                    <span className="text-emerald-800 font-medium text-sm">
+                    <span className="text-emerald-800 font-medium text-xs">
                       Country selected: {countries.find(([code]) => code === selectedCountryCode)?.[1]}
                     </span>
                   </div>
@@ -95,9 +95,9 @@ export const CountrySelection: React.FC<CountrySelectionProps> = ({
       {/* Footer */}
       <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
         <div className="flex justify-center items-center gap-2">
-          <span className="text-sm text-gray-500">Powered by</span>
+          <span className="text-xs text-gray-500">Powered by</span>
           <img
-            className="h-5"
+            className="h-4"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />
