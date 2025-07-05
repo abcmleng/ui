@@ -12,50 +12,6 @@ interface SelfieCaptureProps {
   onError?: (errorMessage: string) => void;
 }
 
-const styles = {
-  header: {
-    display: 'flex',
-    justifyContent: 'center', // center horizontally
-    alignItems: 'center', // center vertically
-    padding: '0.75rem 1rem',
-    borderRadius: '0 0 0.5rem 0.5rem',
-    gap: '0.5rem',
-    color: '#000', // black text
-    fontWeight: '600',
-    fontSize: '1.125rem', // ~18px
-  },
-  logo: {
-    height: '30px',
-  },
-  footer: {
-    marginTop: 'auto',
-    backgroundColor: '#f3f4f6',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '0.5rem',
-    padding: '0.5rem 1rem',
-  },
-  footerText: {
-    fontSize: '0.875rem',
-    color: '#6b7280',
-  },
-  footerImg: {
-    height: '20px',
-  },
-  captureText: {
-    position: 'absolute',
-    top: '8px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    color: 'white',
-    fontWeight: '600',
-    fontSize: '1.25rem',
-    zIndex: 10,
-    userSelect: 'none',
-  },
-};
-
 export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
   onCapture,
   onNext,
@@ -130,102 +86,128 @@ export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
 
   if (captureError) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-3">
-        <div className="w-full max-w-sm mx-auto p-4 rounded-xl bg-white">
-          <ErrorPage
-            error={captureError}
-            onRetry={() => {
-              setCaptureError(null);
-              handleRetake();
-            }}
-            onBack={() => {
-              setCaptureError(null);
-              handleRetake();
-            }}
-          />
+      <div className="fixed inset-0 flex flex-col bg-slate-50 overflow-hidden">
+        <div className="flex-1 flex items-center justify-center p-6">
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
+            <ErrorPage
+              error={captureError}
+              onRetry={() => {
+                setCaptureError(null);
+                handleRetake();
+              }}
+              onBack={() => {
+                setCaptureError(null);
+                handleRetake();
+              }}
+            />
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 px-6">
-      {/* HEADER */}
-      <header style={styles.header}>
-        <img
-          style={styles.logo}
-          src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
-          alt="IDMerit Logo"
-        />
-      </header>
+    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden">
+      {/* Header */}
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+        <div className="flex justify-center">
+          <img
+            className="h-8"
+            src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
+            alt="IDMerit Logo"
+          />
+        </div>
+      </div>
 
-      {/* MAIN CONTENT */}
-      <main className="flex-grow flex flex-col items-center justify-center p-3 overflow-hidden">
-        <div className="w-full max-w-sm bg-white rounded-xl shadow-md flex flex-col">
-          <div className="relative bg-gray-900 rounded-xl overflow-hidden flex-grow aspect-[3/4]">
-            {/* Capture Selfie Text */}
-            <p style={styles.captureText}>Capture Selfie</p>
-
-            {!capturedImage ? (
-              <>
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  muted
-                  className="w-full h-full object-cover"
-                  style={{ transform: 'scaleX(-1)' }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="border-2 border-white/50 rounded-full w-[16rem] h-[21.3rem]" />
-                </div>
-                {isLoading && (
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white"></div>
-                  </div>
-                )}
-              </>
-            ) : (
-              <img src={capturedImage.url} alt="Captured selfie" className="w-full h-full object-cover" />
-            )}
-          </div>
-
-          {uploadError && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-md m-3 text-sm">
-              {uploadError}
+      {/* Main Content */}
+      <div className="flex-1 flex items-center justify-center p-6 overflow-hidden">
+        <div className="w-full max-w-sm">
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+            {/* Title Section */}
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-8 text-center">
+              <Camera className="w-12 h-12 mx-auto mb-4 text-white" />
+              <h1 className="text-2xl font-bold text-white mb-2">Take Your Selfie</h1>
+              <p className="text-blue-100 text-sm">Position your face within the oval frame</p>
             </div>
-          )}
 
-          <div className="flex gap-2 px-3 pb-4 pt-3">
-            {!capturedImage ? (
-              <button
-                onClick={handleCapture}
-                disabled={!isStreaming || isCapturing}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-semibold py-2 rounded-lg text-sm transition"
-              >
-                {isCapturing ? 'Capturing...' : 'Take Selfie'}
-              </button>
-            ) : (
-              <button
-                onClick={handleRetake}
-                className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded-lg text-sm transition"
-              >
-                Retake
-              </button>
-            )}
+            {/* Camera Section */}
+            <div className="p-6">
+              <div className="relative bg-gray-900 rounded-2xl overflow-hidden aspect-[3/4] mb-6">
+                {!capturedImage ? (
+                  <>
+                    <video
+                      ref={videoRef}
+                      autoPlay
+                      playsInline
+                      muted
+                      className="w-full h-full object-cover"
+                      style={{ transform: 'scaleX(-1)' }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="border-4 border-white/60 rounded-full w-64 h-80 shadow-lg" />
+                    </div>
+                    {isLoading && (
+                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-4 border-white border-t-transparent"></div>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <img src={capturedImage.url} alt="Captured selfie" className="w-full h-full object-cover" />
+                )}
+              </div>
+
+              {uploadError && (
+                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-4 text-sm">
+                  {uploadError}
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                {!capturedImage ? (
+                  <button
+                    onClick={handleCapture}
+                    disabled={!isStreaming || isCapturing}
+                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                  >
+                    {isCapturing ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                        Capturing...
+                      </>
+                    ) : (
+                      <>
+                        <Camera className="w-5 h-5" />
+                        Take Selfie
+                      </>
+                    )}
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleRetake}
+                    className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 shadow-lg"
+                  >
+                    Retake Photo
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </main>
+      </div>
 
-      {/* FOOTER */}
-      <footer style={styles.footer}>
-        <span style={styles.footerText}>Powered by</span>
-        <img
-          style={styles.footerImg}
-          src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
-          alt="IDMerit Logo"
-        />
-      </footer>
+      {/* Footer */}
+      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-6 py-3">
+        <div className="flex justify-center items-center gap-2">
+          <span className="text-sm text-gray-500">Powered by</span>
+          <img
+            className="h-5"
+            src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
+            alt="IDMerit Logo"
+          />
+        </div>
+      </div>
     </div>
   );
 };

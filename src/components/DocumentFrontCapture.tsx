@@ -12,39 +12,6 @@ interface DocumentFrontCaptureProps {
   onError?: (errorMessage: string) => void;
 }
 
-const styles = {
-  header: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '0.25rem 0.5rem',
-    borderRadius: '0 0 0.5rem 0.5rem',
-    backgroundColor: '#fff',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-    height: '36px',
-  },
-  logo: {
-    height: '18px',
-  },
-  footer: {
-    marginTop: 'auto',
-    backgroundColor: '#f3f4f6',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '0.25rem',
-    padding: '0.125rem 0.5rem',
-    height: '28px',
-  },
-  footerText: {
-    fontSize: '0.625rem', // smaller font
-    color: '#6b7280',
-  },
-  footerImg: {
-    height: '14px',
-  },
-};
-
 export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
   onCapture,
   onNext,
@@ -55,7 +22,6 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
     videoRef,
     isStreaming,
     isLoading,
-    error,
     startCamera,
     stopCamera,
     captureImage,
@@ -161,9 +127,9 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
 
   if (captureError) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <div className="w-full max-w-md mx-auto">
-          <div className="bg-white rounded-3xl overflow-hidden p-6">
+      <div className="fixed inset-0 flex flex-col bg-slate-50 overflow-hidden">
+        <div className="flex-1 flex items-center justify-center p-6">
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
             <ErrorPage
               error={captureError}
               onRetry={() => {
@@ -182,28 +148,32 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
   }
 
   return (
-    <div className="flex flex-col min-h-screen p-4 bg-gray-50">
-      {/* SMALL HEADER */}
-      <header style={styles.header}>
-        <img
-          style={styles.logo}
-          src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
-          alt="IDMerit Logo"
-        />
-      </header>
+    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-purple-50 to-pink-100 overflow-hidden">
+      {/* Header */}
+      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+        <div className="flex justify-center">
+          <img
+            className="h-8"
+            src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
+            alt="IDMerit Logo"
+          />
+        </div>
+      </div>
 
-      {/* MAIN CONTENT */}
-      <main className="flex-grow flex flex-col items-center justify-center">
-        <div className="w-full max-w-md mx-auto">
-          <div className="bg-white rounded-3xl overflow-hidden">
-            <div className="p-4 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white">
-              <CreditCard className="w-10 h-10 mx-auto mb-2" />
-              <h2 className="text-xl font-bold mb-1">Document Front</h2>
+      {/* Main Content */}
+      <div className="flex-1 flex items-center justify-center p-6 overflow-hidden">
+        <div className="w-full max-w-md">
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+            {/* Title Section */}
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-8 text-center">
+              <CreditCard className="w-12 h-12 mx-auto mb-4 text-white" />
+              <h1 className="text-2xl font-bold text-white mb-2">Document Front</h1>
               <p className="text-purple-100 text-sm">Align your ID front within the frame</p>
             </div>
 
-            <div className="p-4">
-              <div className="relative bg-gray-900 rounded-2xl overflow-hidden mb-4 aspect-[4/3]">
+            {/* Camera Section */}
+            <div className="p-6">
+              <div className="relative bg-gray-900 rounded-2xl overflow-hidden aspect-[4/3] mb-6">
                 {!capturedImage ? (
                   <>
                     <video
@@ -214,16 +184,16 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-72 h-48 border-4 border-white/50 rounded-2xl flex items-center justify-center">
-                        <div className="text-white/70 text-center">
-                          <CreditCard className="w-14 h-14 mx-auto mb-1" />
-                          <p className="text-xs">Align ID front</p>
+                      <div className="w-80 h-52 border-4 border-white/60 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="text-white/80 text-center">
+                          <CreditCard className="w-16 h-16 mx-auto mb-2" />
+                          <p className="text-sm font-medium">Align ID Front</p>
                         </div>
                       </div>
                     </div>
                     {isLoading && (
                       <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white"></div>
+                        <div className="animate-spin rounded-full h-12 w-12 border-4 border-white border-t-transparent"></div>
                       </div>
                     )}
                   </>
@@ -236,50 +206,59 @@ export const DocumentFrontCapture: React.FC<DocumentFrontCaptureProps> = ({
                 )}
               </div>
 
-              {error && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-3 text-sm">
-                  {error}
-                </div>
-              )}
-
               {uploadError && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-3 text-sm">
+                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-4 text-sm">
                   {uploadError}
                 </div>
               )}
 
-              <div className="flex flex-col gap-2">
-                {isUploading && (
-                  <div className="text-center text-purple-600 font-semibold mb-1 text-sm">
-                    Processing...
+              {isUploading && (
+                <div className="bg-blue-50 border border-blue-200 text-blue-600 px-4 py-3 rounded-lg mb-4 text-sm text-center">
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-blue-600 border-t-transparent"></div>
+                    Processing document...
                   </div>
-                )}
-                <div className="flex gap-2">
-                  {!capturedImage && (
-                    <button
-                      onClick={handleCapture}
-                      disabled={!isStreaming || isCapturing || isUploading}
-                      className="flex-1 bg-purple-500 hover:bg-purple-600 disabled:bg-gray-300 text-white font-semibold py-3 px-4 rounded-lg text-sm"
-                    >
-                      {isCapturing ? 'Capturing...' : 'Capture Document'}
-                    </button>
-                  )}
                 </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                {!capturedImage && (
+                  <button
+                    onClick={handleCapture}
+                    disabled={!isStreaming || isCapturing || isUploading}
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                  >
+                    {isCapturing ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                        Capturing...
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard className="w-5 h-5" />
+                        Capture Document
+                      </>
+                    )}
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
-      {/* SMALL FOOTER */}
-      <footer style={styles.footer}>
-        <span style={styles.footerText}>Powered by</span>
-        <img
-          style={styles.footerImg}
-          src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
-          alt="IDMerit Logo"
-        />
-      </footer>
+      {/* Footer */}
+      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-6 py-3">
+        <div className="flex justify-center items-center gap-2">
+          <span className="text-sm text-gray-500">Powered by</span>
+          <img
+            className="h-5"
+            src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
+            alt="IDMerit Logo"
+          />
+        </div>
+      </div>
     </div>
   );
 };

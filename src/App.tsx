@@ -5,23 +5,26 @@ const styles = {
   appContainer: {
     display: 'flex',
     flexDirection: 'column' as const,
-    minHeight: '100vh',
+    height: '100vh',
+    width: '100vw',
     overflow: 'hidden',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f8fafc',
+    position: 'fixed' as const,
+    top: 0,
+    left: 0,
   },
   content: {
     flex: 1,
-    overflowY: 'hidden' as const,
+    overflow: 'hidden',
     width: '100%',
-    maxWidth: '600px',
+    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   kycFlowWrapper: {
     width: '100%',
+    height: '100%',
   },
 };
 
