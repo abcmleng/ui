@@ -86,9 +86,9 @@ export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
 
   if (captureError) {
     return (
-      <div className="h-screen w-full flex flex-col bg-gray-50">
+      <div className="h-screen w-full flex flex-col bg-gray-50 safe-area-all">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0">
+        <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0 safe-area-top">
           <div className="max-w-md mx-auto text-center">
             <img
               className="h-8 mx-auto"
@@ -99,7 +99,7 @@ export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
         </div>
 
         {/* Content */}
-        <div className="flex-1 flex items-center justify-center p-4 min-h-0">
+        <div className="flex-1 flex items-center justify-center p-4 min-h-0 safe-area-x">
           <div className="w-full max-w-md">
             <ErrorPage
               error={captureError}
@@ -116,7 +116,7 @@ export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0">
+        <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0 safe-area-bottom">
           <div className="max-w-md mx-auto text-center">
             <span className="text-sm text-gray-500">Powered by IDMerit</span>
           </div>
@@ -126,9 +126,9 @@ export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
   }
 
   return (
-    <div className="h-screen w-full flex flex-col bg-gray-50">
+    <div className="h-screen w-full flex flex-col bg-gray-50 safe-area-all">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0">
+      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0 safe-area-top">
         <div className="max-w-md mx-auto text-center">
           <img
             className="h-8 mx-auto"
@@ -140,11 +140,11 @@ export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col p-4 min-h-0">
+      <div className="flex-1 flex flex-col p-4 min-h-0 safe-area-x">
         <div className="w-full max-w-md mx-auto flex flex-col h-full">
           {/* Camera Area */}
           <div className="flex-1 bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-4 min-h-0">
-            <div className="relative bg-gray-900 rounded-lg overflow-hidden h-full min-h-[300px]">
+            <div className="relative bg-gray-900 rounded-lg overflow-hidden h-full min-h-[280px]">
               {!capturedImage ? (
                 <>
                   <video
@@ -178,12 +178,12 @@ export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
           )}
 
           {/* Action Buttons */}
-          <div className="flex gap-3">
+          <div className="flex gap-3 mobile-portrait-adjust">
             {!capturedImage ? (
               <button
                 onClick={handleCapture}
                 disabled={!isStreaming || isCapturing}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-4 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 min-h-[48px]"
               >
                 {isCapturing ? (
                   <>
@@ -200,7 +200,7 @@ export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
             ) : (
               <button
                 onClick={handleRetake}
-                className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-4 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 min-h-[48px]"
               >
                 <RotateCcw className="w-4 h-4" />
                 Retake
@@ -211,7 +211,7 @@ export const SelfieCapture: React.FC<SelfieCaptureProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0">
+      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0 safe-area-bottom">
         <div className="max-w-md mx-auto text-center">
           <span className="text-sm text-gray-500">Powered by IDMerit</span>
         </div>

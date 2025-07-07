@@ -32,9 +32,9 @@ export const CountrySelection: React.FC<CountrySelectionProps> = ({
   };
 
   return (
-    <div className="h-screen w-full flex flex-col bg-gray-50">
+    <div className="h-screen w-full flex flex-col bg-gray-50 safe-area-all">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0">
+      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0 safe-area-top">
         <div className="max-w-md mx-auto text-center">
           <img
             className="h-8 mx-auto"
@@ -46,7 +46,7 @@ export const CountrySelection: React.FC<CountrySelectionProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col justify-center p-4 min-h-0">
+      <div className="flex-1 flex flex-col justify-center p-4 min-h-0 safe-area-x">
         <div className="w-full max-w-md mx-auto">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             {/* Icon */}
@@ -64,7 +64,7 @@ export const CountrySelection: React.FC<CountrySelectionProps> = ({
               </label>
               <div className="relative">
                 <select
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none min-h-[48px]"
                   value={selectedCountryCode || ''}
                   onChange={handleChange}
                 >
@@ -97,7 +97,7 @@ export const CountrySelection: React.FC<CountrySelectionProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0">
+      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0 safe-area-bottom">
         <div className="max-w-md mx-auto text-center">
           <span className="text-sm text-gray-500">Powered by IDMerit</span>
         </div>

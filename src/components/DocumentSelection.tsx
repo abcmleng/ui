@@ -49,9 +49,9 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
   };
 
   return (
-    <div className="h-screen w-full flex flex-col bg-gray-50">
+    <div className="h-screen w-full flex flex-col bg-gray-50 safe-area-all">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0">
+      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0 safe-area-top">
         <div className="max-w-md mx-auto text-center">
           <img
             className="h-8 mx-auto"
@@ -63,7 +63,7 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col justify-center p-4 min-h-0">
+      <div className="flex-1 flex flex-col justify-center p-4 min-h-0 safe-area-x">
         <div className="w-full max-w-md mx-auto">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             {/* Icon */}
@@ -84,7 +84,7 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
                 {documentTypes.map((docType) => (
                   <button
                     key={docType.value}
-                    className="w-full p-4 border border-gray-200 rounded-lg text-left hover:border-blue-300 hover:bg-blue-50 transition-all group focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-4 border border-gray-200 rounded-lg text-left hover:border-blue-300 hover:bg-blue-50 transition-all group focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[48px]"
                     onClick={() => handleDocumentSelect(docType.value)}
                   >
                     <div className="flex items-center justify-between">
@@ -107,7 +107,7 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0">
+      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0 safe-area-bottom">
         <div className="max-w-md mx-auto text-center">
           <span className="text-sm text-gray-500">Powered by IDMerit</span>
         </div>

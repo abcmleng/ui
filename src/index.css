@@ -13,12 +13,47 @@ html, body {
 
 #root {
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
   overflow: hidden;
 }
 
 /* Ensure all containers are non-scrollable */
 * {
   box-sizing: border-box;
+}
+
+/* Safe area support for mobile devices - CRITICAL for avoiding notch/frame overlap */
+.safe-area-top {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+
+.safe-area-bottom {
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.safe-area-left {
+  padding-left: max(1rem, env(safe-area-inset-left));
+}
+
+.safe-area-right {
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+.safe-area-x {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+.safe-area-y {
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.safe-area-all {
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
 }
 
 /* Ensure proper viewport height handling */
@@ -38,6 +73,45 @@ html, body {
   min-height: 0;
 }
 
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+  /* Ensure minimum touch target size */
+  button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Add extra padding on mobile for better spacing */
+  .mobile-padding {
+    padding: 1rem;
+  }
+  
+  /* Ensure content doesn't get too close to edges */
+  .mobile-safe-content {
+    margin-left: max(1rem, env(safe-area-inset-left));
+    margin-right: max(1rem, env(safe-area-inset-right));
+    margin-top: max(0.5rem, env(safe-area-inset-top));
+    margin-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  
+  /* Extra safe area for buttons to avoid home indicator */
+  .mobile-button-safe {
+    margin-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* iPhone specific adjustments */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific */
+  .safe-area-bottom {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-all {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+}
+
 /* Responsive breakpoints */
 @media (min-width: 640px) {
   .max-w-md {
@@ -54,13 +128,6 @@ html, body {
 @media (min-width: 1024px) {
   .max-w-md {
     max-width: 36rem;
-  }
-}
-
-/* Ensure buttons are touch-friendly on mobile */
-@media (max-width: 640px) {
-  button {
-    min-height: 44px;
   }
 }
 
@@ -99,4 +166,54 @@ input:focus-visible {
 
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Viewport meta tag support */
+@supports (height: 100dvh) {
+  .h-screen {
+    height: 100dvh;
+  }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 640px) and (orientation: portrait) {
+  /* Portrait mode specific adjustments */
+  .mobile-portrait-adjust {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+  
+  /* Ensure buttons are never hidden by home indicator */
+  .mobile-button-container {
+    padding-bottom: max(2.5rem, calc(env(safe-area-inset-bottom) + 1rem));
+  }
+}
+
+@media (max-width: 640px) and (orientation: landscape) {
+  /* Landscape mode specific adjustments */
+  .mobile-landscape-adjust {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Specific fixes for iPhone models with home indicator */
+@media (max-width: 430px) {
+  /* iPhone 14 Pro Max and similar */
+  .safe-area-bottom {
+    padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 393px) {
+  /* iPhone 14 Pro and similar */
+  .safe-area-bottom {
+    padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 375px) {
+  /* iPhone 13 mini and similar */
+  .safe-area-bottom {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
 }
