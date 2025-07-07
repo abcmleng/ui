@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, ChevronRight, CreditCard, BookOpen, IdCard } from 'lucide-react';
+import { FileText, ChevronRight, CreditCard, BookOpen, Car as IdCard } from 'lucide-react';
 import metadata from '../helper/metadata.json';
 
 interface DocumentSelectionProps {
