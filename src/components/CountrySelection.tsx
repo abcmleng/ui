@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe, ChevronDown } from 'lucide-react';
+import { Globe, ChevronDown, MapPin } from 'lucide-react';
 import metadata from '../helper/metadata.json';
 
 interface CountrySelectionProps {
@@ -32,76 +32,89 @@ export const CountrySelection: React.FC<CountrySelectionProps> = ({
   };
 
   return (
-    <div className="h-screen w-full flex flex-col bg-gray-50 safe-area-all">
+    <div className="h-screen w-full flex flex-col bg-slate-50 safe-area-inset">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0 safe-area-top">
-        <div className="max-w-md mx-auto text-center">
-          <img
-            className="h-8 mx-auto"
-            src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
-            alt="IDMerit Logo"
-          />
-          <h1 className="text-lg font-semibold text-gray-900 mt-2">Select Your Country</h1>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col justify-center p-4 min-h-0 safe-area-x">
-        <div className="w-full max-w-md mx-auto">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            {/* Icon */}
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Globe className="w-8 h-8 text-blue-600" />
-              </div>
-              <p className="text-gray-600">Choose your country to continue verification</p>
-            </div>
-
-            {/* Selection */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Country of Document
-              </label>
-              <div className="relative">
-                <select
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none min-h-[48px]"
-                  value={selectedCountryCode || ''}
-                  onChange={handleChange}
-                >
-                  <option value="" disabled>
-                    Select a country
-                  </option>
-                  {countries.map(([code, name]) => (
-                    <option key={code} value={code}>
-                      {name}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
-              </div>
-            </div>
-
-            {/* Selected Country Display */}
-            {selectedCountryCode && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-green-800 font-medium text-sm">
-                    Selected: {countries.find(([code]) => code === selectedCountryCode)?.[1]}
-                  </span>
-                </div>
-              </div>
-            )}
+      <header className="bg-white shadow-sm border-b border-slate-200 flex-shrink-0">
+        <div className="max-w-md mx-auto px-4 py-4">
+          <div className="flex items-center justify-center mb-2">
+            <img
+              className="h-8"
+              src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
+              alt="IDMerit"
+            />
+          </div>
+          <div className="text-center">
+            <h1 className="text-xl font-semibold text-slate-900">Select Your Country</h1>
+            <p className="text-sm text-slate-600 mt-1">Choose your country to continue verification</p>
           </div>
         </div>
-      </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col justify-center p-4 min-h-0">
+        <div className="w-full max-w-md mx-auto animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6">
+            {/* Icon Section */}
+            <div className="text-center mb-8">
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                <Globe className="w-10 h-10 text-blue-600" />
+              </div>
+              <h2 className="text-lg font-semibold text-slate-900 mb-2">Document Country</h2>
+              <p className="text-slate-600">Select the country where your document was issued</p>
+            </div>
+
+            {/* Country Selection */}
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-3">
+                  Country of Document
+                </label>
+                <div className="relative">
+                  <select
+                    className="w-full px-4 py-4 border-2 border-slate-200 rounded-xl text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none btn-touch transition-all duration-200 hover:border-slate-300"
+                    value={selectedCountryCode || ''}
+                    onChange={handleChange}
+                  >
+                    <option value="" disabled>
+                      Choose a country...
+                    </option>
+                    {countries.map(([code, name]) => (
+                      <option key={code} value={code}>
+                        {name}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
+                </div>
+              </div>
+
+              {/* Selected Country Confirmation */}
+              {selectedCountryCode && (
+                <div className="bg-green-50 border-2 border-green-200 rounded-xl p-4 animate-fade-in">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-4 h-4 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="text-green-800 font-medium">
+                        {countries.find(([code]) => code === selectedCountryCode)?.[1]}
+                      </p>
+                      <p className="text-green-600 text-sm">Country selected successfully</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
 
       {/* Footer */}
-      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0 safe-area-bottom">
-        <div className="max-w-md mx-auto text-center">
-          <span className="text-sm text-gray-500">Powered by IDMerit</span>
+      <footer className="bg-white border-t border-slate-200 flex-shrink-0">
+        <div className="max-w-md mx-auto px-4 py-3 text-center">
+          <span className="text-sm text-slate-500">Powered by IDMerit</span>
         </div>
-      </div>
+      </footer>
     </div>
   );
 };

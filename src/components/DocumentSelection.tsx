@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, ChevronRight } from 'lucide-react';
+import { FileText, ChevronRight, CreditCard, BookOpen, IdCard } from 'lucide-react';
 import metadata from '../helper/metadata.json';
 
 interface DocumentSelectionProps {
@@ -14,6 +14,20 @@ const typeLabelMap: Record<string, string> = {
   DL: 'Driving License',
   NI: 'National ID',
   AADHAAR: 'Aadhaar',
+};
+
+const getDocumentIcon = (type: string) => {
+  switch (type.toUpperCase()) {
+    case 'PP':
+      return <BookOpen className="w-6 h-6" />;
+    case 'DL':
+      return <CreditCard className="w-6 h-6" />;
+    case 'NI':
+    case 'AADHAAR':
+      return <IdCard className="w-6 h-6" />;
+    default:
+      return <FileText className="w-6 h-6" />;
+  }
 };
 
 export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
@@ -49,69 +63,86 @@ export const DocumentSelection: React.FC<DocumentSelectionProps> = ({
   };
 
   return (
-    <div className="h-screen w-full flex flex-col bg-gray-50 safe-area-all">
+    <div className="h-screen w-full flex flex-col bg-slate-50 safe-area-inset">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0 safe-area-top">
-        <div className="max-w-md mx-auto text-center">
-          <img
-            className="h-8 mx-auto"
-            src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
-            alt="IDMerit Logo"
-          />
-          <h1 className="text-lg font-semibold text-gray-900 mt-2">Select Document Type</h1>
+      <header className="bg-white shadow-sm border-b border-slate-200 flex-shrink-0">
+        <div className="max-w-md mx-auto px-4 py-4">
+          <div className="flex items-center justify-center mb-2">
+            <img
+              className="h-8"
+              src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
+              alt="IDMerit"
+            />
+          </div>
+          <div className="text-center">
+            <h1 className="text-xl font-semibold text-slate-900">Select Document Type</h1>
+            <p className="text-sm text-slate-600 mt-1">Choose the type of document you want to verify</p>
+          </div>
         </div>
-      </div>
+      </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col justify-center p-4 min-h-0 safe-area-x">
-        <div className="w-full max-w-md mx-auto">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            {/* Icon */}
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <FileText className="w-8 h-8 text-blue-600" />
+      <main className="flex-1 flex flex-col justify-center p-4 min-h-0">
+        <div className="w-full max-w-md mx-auto animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6">
+            {/* Icon Section */}
+            <div className="text-center mb-8">
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                <FileText className="w-10 h-10 text-blue-600" />
               </div>
-              <p className="text-gray-600">Choose the type of document you want to verify</p>
+              <h2 className="text-lg font-semibold text-slate-900 mb-2">Document Type</h2>
+              <p className="text-slate-600">Select the document you'd like to verify</p>
             </div>
 
             {/* Document Options */}
-            {documentTypes.length === 0 ? (
-              <div className="text-center py-6">
-                <p className="text-gray-500">No document types available for the selected country.</p>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {documentTypes.map((docType) => (
+            <div className="space-y-3">
+              {documentTypes.length === 0 ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <FileText className="w-8 h-8 text-slate-400" />
+                  </div>
+                  <p className="text-slate-500 font-medium">No documents available</p>
+                  <p className="text-slate-400 text-sm mt-1">No document types found for the selected country</p>
+                </div>
+              ) : (
+                documentTypes.map((docType) => (
                   <button
                     key={docType.value}
-                    className="w-full p-4 border border-gray-200 rounded-lg text-left hover:border-blue-300 hover:bg-blue-50 transition-all group focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[48px]"
+                    className="w-full p-4 border-2 border-slate-200 rounded-xl text-left hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-blue-500 btn-touch"
                     onClick={() => handleDocumentSelect(docType.value)}
                   >
                     <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="font-medium text-gray-900 group-hover:text-blue-700">
-                          {docType.label}
-                        </h3>
-                        <p className="text-sm text-gray-500 mt-1">
-                          Verify your {docType.label.toLowerCase()}
-                        </p>
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-slate-100 group-hover:bg-blue-100 rounded-lg flex items-center justify-center transition-colors duration-200">
+                          <div className="text-slate-600 group-hover:text-blue-600">
+                            {getDocumentIcon(docType.value)}
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors duration-200">
+                            {docType.label}
+                          </h3>
+                          <p className="text-sm text-slate-500 mt-1">
+                            Verify your {docType.label.toLowerCase()}
+                          </p>
+                        </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600" />
+                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-blue-600 transition-colors duration-200" />
                     </div>
                   </button>
-                ))}
-              </div>
-            )}
+                ))
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
 
       {/* Footer */}
-      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0 safe-area-bottom">
-        <div className="max-w-md mx-auto text-center">
-          <span className="text-sm text-gray-500">Powered by IDMerit</span>
+      <footer className="bg-white border-t border-slate-200 flex-shrink-0">
+        <div className="max-w-md mx-auto px-4 py-3 text-center">
+          <span className="text-sm text-slate-500">Powered by IDMerit</span>
         </div>
-      </div>
+      </footer>
     </div>
   );
 };

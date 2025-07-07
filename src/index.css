@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent scrolling on the entire page */
+/* Reset and base styles */
 html, body {
   height: 100%;
   overflow: hidden;
   margin: 0;
   padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 #root {
@@ -20,7 +21,7 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Ensure proper viewport height handling */
+/* Proper viewport height handling */
 .h-screen {
   height: 100vh;
   height: 100dvh; /* Dynamic viewport height for mobile */
@@ -37,38 +38,77 @@ html, body {
   min-height: 0;
 }
 
-/* Safe area support for mobile devices */
-.safe-area-all {
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-}
-
-.safe-area-top {
+/* Safe area support for modern devices */
+.safe-area-inset {
   padding-top: env(safe-area-inset-top);
-}
-
-.safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);
-}
-
-.safe-area-x {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
 
-/* Mobile adjustments */
+.safe-top {
+  padding-top: max(env(safe-area-inset-top), 16px);
+}
+
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 16px);
+}
+
+.safe-x {
+  padding-left: max(env(safe-area-inset-left), 16px);
+  padding-right: max(env(safe-area-inset-right), 16px);
+}
+
+/* Button minimum touch target */
+.btn-touch {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Camera overlay styles */
+.camera-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    transparent 20%,
+    transparent 80%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+/* Responsive adjustments */
 @media (max-width: 640px) {
-  .mobile-portrait-adjust {
-    margin-bottom: env(safe-area-inset-bottom, 20px);
+  .mobile-spacing {
+    padding: 12px;
+  }
+  
+  .mobile-text {
+    font-size: 14px;
   }
 }
 
-/* Ensure buttons are always accessible */
 @media (max-height: 600px) {
-  .min-h-\[280px\] {
+  .compact-height .min-h-\[280px\] {
     min-height: 200px !important;
   }
   
-  .min-h-\[300px\] {
+  .compact-height .min-h-\[300px\] {
     min-height: 220px !important;
   }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Focus styles for accessibility */
+.focus-ring:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
