@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Scan } from 'lucide-react';
+import { Scan, RotateCcw } from 'lucide-react';
 import { useCamera } from '../hooks/useCamera';
 import { kycApiService } from '../services/kycApi';
 import { ErrorPage, CaptureError } from './ErrorPage';
@@ -133,12 +133,12 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
 
   if (captureError) {
     return (
-      <div className="h-screen flex flex-col bg-slate-50">
+      <div className="h-screen w-full flex flex-col bg-gray-50">
         {/* Header */}
-        <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
-          <div className="flex justify-center">
+        <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0">
+          <div className="max-w-md mx-auto text-center">
             <img
-              className="h-6"
+              className="h-8 mx-auto"
               src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
               alt="IDMerit Logo"
             />
@@ -146,8 +146,8 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
         </div>
 
         {/* Content */}
-        <div className="flex-1 flex items-center justify-center p-3 min-h-0">
-          <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-4">
+        <div className="flex-1 flex items-center justify-center p-4 min-h-0">
+          <div className="w-full max-w-md">
             <ErrorPage
               error={captureError}
               onRetry={handleRetry}
@@ -157,14 +157,9 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
         </div>
 
         {/* Footer */}
-        <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
-          <div className="flex justify-center items-center gap-2">
-            <span className="text-xs text-gray-500">Powered by</span>
-            <img
-              className="h-4"
-              src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
-              alt="IDMerit Logo"
-            />
+        <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0">
+          <div className="max-w-md mx-auto text-center">
+            <span className="text-sm text-gray-500">Powered by IDMerit</span>
           </div>
         </div>
       </div>
@@ -172,113 +167,100 @@ export const MRZScanner: React.FC<MRZScannerProps> = ({ onScan, onNext, verifica
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-green-50 to-teal-100">
+    <div className="h-screen w-full flex flex-col bg-gray-50">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
-        <div className="flex justify-center">
+      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0">
+        <div className="max-w-md mx-auto text-center">
           <img
-            className="h-6"
+            className="h-8 mx-auto"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />
+          <h1 className="text-lg font-semibold text-gray-900 mt-2">Scan MRZ Code</h1>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col justify-center p-3 min-h-0 overflow-hidden">
-        <div className="w-full max-w-md mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-            {/* Title Section */}
-            <div className="bg-gradient-to-r from-green-600 to-teal-600 px-4 py-4 text-center">
-              <Scan className="w-8 h-8 mx-auto mb-2 text-white" />
-              <h1 className="text-lg font-bold text-white mb-1">Scan MRZ Code</h1>
-              <p className="text-green-100 text-xs">Position the MRZ area at the bottom of your ID</p>
-            </div>
-
-            {/* Camera Section */}
-            <div className="p-3">
-              <div className="relative bg-gray-900 rounded-xl overflow-hidden aspect-[4/3] mb-3">
-                <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-60 h-14 border-3 border-white/60 rounded-lg flex items-center justify-center shadow-lg">
-                    <div className="text-white/80 text-center">
-                      <Scan className="w-5 h-5 mx-auto mb-1" />
-                      <p className="text-xs font-medium">MRZ Scan Area</p>
-                    </div>
-                  </div>
+      <div className="flex-1 flex flex-col p-4 min-h-0">
+        <div className="w-full max-w-md mx-auto flex flex-col h-full">
+          {/* Camera Area */}
+          <div className="flex-1 bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-4 min-h-0">
+            <div className="relative bg-gray-900 rounded-lg overflow-hidden h-full min-h-[300px]">
+              <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="border-2 border-white/60 rounded-lg w-48 h-12 flex items-center justify-center">
+                  <Scan className="w-5 h-5 text-white/80 mr-2" />
+                  <span className="text-white/80 text-sm">MRZ Area</span>
                 </div>
-
-                {(isLoading || isScanning) && (
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <div className="animate-spin rounded-full h-8 w-8 border-3 border-white border-t-transparent mx-auto mb-2"></div>
-                      <p className="text-xs">{isScanning ? 'Scanning...' : 'Loading camera...'}</p>
-                    </div>
-                  </div>
-                )}
               </div>
 
-              {ocrStatus === 'SUCCESSFUL' && (
-                <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 rounded-lg mb-3 text-xs text-center font-semibold">
-                  MRZ Status: SUCCESSFUL
+              {(isLoading || isScanning) && (
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                  <div className="text-center text-white">
+                    <div className="animate-spin rounded-full h-8 w-8 border-2 border-white border-t-transparent mx-auto mb-2"></div>
+                    <p className="text-sm">{isScanning ? 'Scanning...' : 'Loading camera...'}</p>
+                  </div>
                 </div>
               )}
+            </div>
+          </div>
 
-              {error && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-3 text-xs">
-                  {error}
-                </div>
-              )}
+          {/* Status Messages */}
+          {ocrStatus === 'SUCCESSFUL' && (
+            <div className="bg-green-50 border border-green-200 text-green-800 p-3 rounded-lg mb-4 text-sm text-center font-medium">
+              MRZ Status: SUCCESSFUL
+            </div>
+          )}
 
-              {uploadError && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-lg mb-3 text-xs">
-                  {uploadError}
-                </div>
-              )}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-lg mb-4 text-sm">
+              {error}
+            </div>
+          )}
 
-              {/* Action Buttons */}
-              <div className="space-y-2">
-                {ocrStatus !== 'SUCCESSFUL' ? (
-                  <button
-                    onClick={handleScan}
-                    disabled={!isStreaming || isScanning}
-                    className="w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-lg text-sm"
-                  >
-                    {isScanning ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                        Scanning...
-                      </>
-                    ) : (
-                      <>
-                        <Scan className="w-4 h-4" />
-                        Scan MRZ
-                      </>
-                    )}
-                  </button>
+          {uploadError && (
+            <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-lg mb-4 text-sm">
+              {uploadError}
+            </div>
+          )}
+
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            {ocrStatus !== 'SUCCESSFUL' ? (
+              <button
+                onClick={handleScan}
+                disabled={!isStreaming || isScanning}
+                className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                {isScanning ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                    Scanning...
+                  </>
                 ) : (
-                  <button
-                    onClick={handleRetry}
-                    className="w-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-lg text-sm"
-                  >
-                    Retry
-                  </button>
+                  <>
+                    <Scan className="w-4 h-4" />
+                    Scan MRZ
+                  </>
                 )}
-              </div>
-            </div>
+              </button>
+            ) : (
+              <button
+                onClick={handleRetry}
+                className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <RotateCcw className="w-4 h-4" />
+                Retry
+              </button>
+            )}
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
-        <div className="flex justify-center items-center gap-2">
-          <span className="text-xs text-gray-500">Powered by</span>
-          <img
-            className="h-4"
-            src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
-            alt="IDMerit Logo"
-          />
+      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0">
+        <div className="max-w-md mx-auto text-center">
+          <span className="text-sm text-gray-500">Powered by IDMerit</span>
         </div>
       </div>
     </div>

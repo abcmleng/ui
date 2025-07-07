@@ -44,102 +44,104 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-emerald-50 to-cyan-100">
+    <div className="h-screen w-full flex flex-col bg-gray-50">
       {/* Header */}
-      <div className="flex-shrink-0 bg-white shadow-sm border-b border-gray-200 px-4 py-2">
-        <div className="flex justify-center">
+      <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0">
+        <div className="max-w-md mx-auto text-center">
           <img
-            className="h-6"
+            className="h-8 mx-auto"
             src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
             alt="IDMerit Logo"
           />
+          <h1 className="text-lg font-semibold text-gray-900 mt-2">
+            {isProcessing ? 'Processing...' : 'Verification Complete!'}
+          </h1>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col justify-center p-3 min-h-0 overflow-hidden">
+      <div className="flex-1 flex flex-col justify-center p-4 min-h-0">
         <div className="w-full max-w-md mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             {isProcessing ? (
-              <div className="p-6 text-center">
+              <div className="text-center">
                 <div className="mb-4">
-                  <div className="animate-spin rounded-full h-12 w-12 border-3 border-emerald-500 border-t-transparent mx-auto"></div>
+                  <div className="animate-spin rounded-full h-12 w-12 border-2 border-blue-600 border-t-transparent mx-auto"></div>
                 </div>
-                <h2 className="text-lg font-bold text-gray-800 mb-3">Processing Verification</h2>
-                <p className="text-gray-600 mb-4 text-sm">
+                <h2 className="text-lg font-semibold text-gray-800 mb-3">Processing Verification</h2>
+                <p className="text-gray-600 mb-4">
                   Please wait while we verify your documents...
                 </p>
                 <div className="bg-gray-100 rounded-full h-2">
-                  <div className="bg-emerald-500 rounded-full h-2 animate-pulse" style={{ width: '70%' }}></div>
+                  <div className="bg-blue-600 rounded-full h-2 animate-pulse" style={{ width: '70%' }}></div>
                 </div>
               </div>
             ) : (
               <>
-                {/* Success Section */}
-                <div className="bg-gradient-to-r from-emerald-600 to-cyan-600 px-4 py-4 text-center">
-                  <CheckCircle className="w-10 h-10 mx-auto mb-2 text-white" />
-                  <h1 className="text-lg font-bold text-white mb-1">Verification Complete!</h1>
-                  <p className="text-emerald-100 text-xs">
+                {/* Success Icon */}
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                  </div>
+                  <p className="text-gray-600">
                     Your KYC verification has been successfully processed
                   </p>
                   {scannerType === 'mrz' && (
-                    <p className="text-emerald-100 font-semibold mt-1 text-xs">MRZ Scan Completed</p>
+                    <p className="text-green-600 font-medium mt-1">MRZ Scan Completed</p>
                   )}
                   {scannerType === 'barcode' && (
-                    <p className="text-emerald-100 font-semibold mt-1 text-xs">Barcode Scan Completed</p>
+                    <p className="text-green-600 font-medium mt-1">Barcode Scan Completed</p>
                   )}
                 </div>
 
-                {/* Summary Section */}
-                <div className="p-4">
-                  <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mb-4">
-                    <h3 className="font-semibold text-emerald-800 mb-2 text-sm">Verification Summary</h3>
-                    <div className="space-y-1 text-xs">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Verification ID:</span>
-                        <span className="font-mono text-emerald-700 text-xs">{kycData.verificationId}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Selfie:</span>
-                        <span className="text-emerald-600">✓ Captured</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Document Front:</span>
-                        <span className="text-emerald-600">✓ Captured</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Document Back:</span>
-                        <span className="text-emerald-600">✓ Captured</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">ID Scan:</span>
-                        <span className="text-emerald-600">✓ Completed</span>
-                      </div>
+                {/* Summary */}
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                  <h3 className="font-medium text-green-800 mb-3">Verification Summary</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Verification ID:</span>
+                      <span className="font-mono text-green-700 text-xs">{kycData.verificationId}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Selfie:</span>
+                      <span className="text-green-600">✓ Captured</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Document Front:</span>
+                      <span className="text-green-600">✓ Captured</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Document Back:</span>
+                      <span className="text-green-600">✓ Captured</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">ID Scan:</span>
+                      <span className="text-green-600">✓ Completed</span>
                     </div>
                   </div>
+                </div>
 
-                  {/* Action Buttons */}
-                  <div className="space-y-2">
-                    <button
-                      onClick={handleDownloadReport}
-                      className="w-full bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-lg text-sm"
-                    >
-                      <Download className="w-4 h-4" />
-                      Download Report
-                    </button>
-                    
-                    <button
-                      onClick={onRestart}
-                      className="w-full bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-4 rounded-lg border-2 border-gray-200 transition-all duration-200 flex items-center justify-center gap-2 text-sm"
-                    >
-                      <RefreshCw className="w-4 h-4" />
-                      Start New Verification
-                    </button>
-                  </div>
+                {/* Action Buttons */}
+                <div className="space-y-3">
+                  <button
+                    onClick={handleDownloadReport}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download Report
+                  </button>
+                  
+                  <button
+                    onClick={onRestart}
+                    className="w-full bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 rounded-lg border border-gray-300 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                    Start New Verification
+                  </button>
+                </div>
 
-                  <div className="mt-4 text-center text-xs text-gray-500">
-                    <p>Verification completed successfully</p>
-                  </div>
+                <div className="mt-4 text-center text-sm text-gray-500">
+                  <p>Verification completed successfully</p>
                 </div>
               </>
             )}
@@ -148,14 +150,9 @@ export const ThankYou: React.FC<ThankYouProps> = ({ kycData, onRestart, scannerT
       </div>
 
       {/* Footer */}
-      <div className="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-2">
-        <div className="flex justify-center items-center gap-2">
-          <span className="text-xs text-gray-500">Powered by</span>
-          <img
-            className="h-4"
-            src="https://www.idmerit.com/wp-content/themes/idmerit/images/idmerit-logo.svg"
-            alt="IDMerit Logo"
-          />
+      <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0">
+        <div className="max-w-md mx-auto text-center">
+          <span className="text-sm text-gray-500">Powered by IDMerit</span>
         </div>
       </div>
     </div>
