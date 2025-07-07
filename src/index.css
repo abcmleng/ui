@@ -20,25 +20,6 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Custom scrollbar for any internal content that might need it */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
 /* Ensure proper viewport height handling */
 .h-screen {
   height: 100vh;
@@ -56,7 +37,38 @@ html, body {
   min-height: 0;
 }
 
-/* Custom border width for better visibility */
-.border-3 {
-  border-width: 3px;
+/* Safe area support for mobile devices */
+.safe-area-all {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-x {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .mobile-portrait-adjust {
+    margin-bottom: env(safe-area-inset-bottom, 20px);
+  }
+}
+
+/* Ensure buttons are always accessible */
+@media (max-height: 600px) {
+  .min-h-\[280px\] {
+    min-height: 200px !important;
+  }
+  
+  .min-h-\[300px\] {
+    min-height: 220px !important;
+  }
 }
