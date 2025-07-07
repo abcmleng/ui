@@ -8,12 +8,10 @@ html, body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
 
 #root {
   height: 100vh;
-  height: 100dvh; /* Dynamic viewport height for mobile */
   overflow: hidden;
 }
 
@@ -22,38 +20,23 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Safe area support for mobile devices - CRITICAL for avoiding notch/frame overlap */
-.safe-area-top {
-  padding-top: max(1rem, env(safe-area-inset-top));
+/* Custom scrollbar for any internal content that might need it */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
 }
 
-.safe-area-bottom {
-  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
 }
 
-.safe-area-left {
-  padding-left: max(1rem, env(safe-area-inset-left));
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
 }
 
-.safe-area-right {
-  padding-right: max(1rem, env(safe-area-inset-right));
-}
-
-.safe-area-x {
-  padding-left: max(1rem, env(safe-area-inset-left));
-  padding-right: max(1rem, env(safe-area-inset-right));
-}
-
-.safe-area-y {
-  padding-top: max(1rem, env(safe-area-inset-top));
-  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
-}
-
-.safe-area-all {
-  padding-top: max(1rem, env(safe-area-inset-top));
-  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
-  padding-left: max(1rem, env(safe-area-inset-left));
-  padding-right: max(1rem, env(safe-area-inset-right));
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 
 /* Ensure proper viewport height handling */
@@ -73,147 +56,7 @@ html, body {
   min-height: 0;
 }
 
-/* Mobile-specific adjustments */
-@media (max-width: 640px) {
-  /* Ensure minimum touch target size */
-  button {
-    min-height: 48px;
-    min-width: 48px;
-  }
-  
-  /* Add extra padding on mobile for better spacing */
-  .mobile-padding {
-    padding: 1rem;
-  }
-  
-  /* Ensure content doesn't get too close to edges */
-  .mobile-safe-content {
-    margin-left: max(1rem, env(safe-area-inset-left));
-    margin-right: max(1rem, env(safe-area-inset-right));
-    margin-top: max(0.5rem, env(safe-area-inset-top));
-    margin-bottom: max(0.5rem, env(safe-area-inset-bottom));
-  }
-  
-  /* Extra safe area for buttons to avoid home indicator */
-  .mobile-button-safe {
-    margin-bottom: max(2rem, env(safe-area-inset-bottom));
-  }
-}
-
-/* iPhone specific adjustments */
-@supports (-webkit-touch-callout: none) {
-  /* iOS Safari specific */
-  .safe-area-bottom {
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
-  }
-  
-  .safe-area-all {
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
-  }
-}
-
-/* Responsive breakpoints */
-@media (min-width: 640px) {
-  .max-w-md {
-    max-width: 28rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .max-w-md {
-    max-width: 32rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .max-w-md {
-    max-width: 36rem;
-  }
-}
-
-/* Smooth transitions */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-/* Focus styles for accessibility */
-button:focus-visible,
-select:focus-visible,
-input:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-}
-
-/* Loading animation */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
-
-/* Pulse animation */
-@keyframes pulse {
-  50% {
-    opacity: .5;
-  }
-}
-
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Viewport meta tag support */
-@supports (height: 100dvh) {
-  .h-screen {
-    height: 100dvh;
-  }
-}
-
-/* Additional mobile optimizations */
-@media (max-width: 640px) and (orientation: portrait) {
-  /* Portrait mode specific adjustments */
-  .mobile-portrait-adjust {
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
-  }
-  
-  /* Ensure buttons are never hidden by home indicator */
-  .mobile-button-container {
-    padding-bottom: max(2.5rem, calc(env(safe-area-inset-bottom) + 1rem));
-  }
-}
-
-@media (max-width: 640px) and (orientation: landscape) {
-  /* Landscape mode specific adjustments */
-  .mobile-landscape-adjust {
-    padding-left: max(1rem, env(safe-area-inset-left));
-    padding-right: max(1rem, env(safe-area-inset-right));
-  }
-}
-
-/* Specific fixes for iPhone models with home indicator */
-@media (max-width: 430px) {
-  /* iPhone 14 Pro Max and similar */
-  .safe-area-bottom {
-    padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
-  }
-}
-
-@media (max-width: 393px) {
-  /* iPhone 14 Pro and similar */
-  .safe-area-bottom {
-    padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
-  }
-}
-
-@media (max-width: 375px) {
-  /* iPhone 13 mini and similar */
-  .safe-area-bottom {
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
-  }
+/* Custom border width for better visibility */
+.border-3 {
+  border-width: 3px;
 }
